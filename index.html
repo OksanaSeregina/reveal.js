@@ -1,40 +1,327 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <style>
+      .list {
+        font-size: 34px;
+      }
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+      .text-left {
+        text-align: left;
+        font-size: 20px;
+      }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+      .hljs {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .code {
+        line-height: 20px;
+      }
+
+      .code-sm {
+        line-height: 18px;
+      }
+
+      .text-small {
+        font-size: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Lodash</h1>
+          <h3>for Rolling Scopes School</h3>
+          <p>by Aksana Siarohina</p>
+        </section>
+        <section>
+          <h2>WHAT IS LODASH?</h2>
+          <p>
+            Lodash is a JavaScript library which provides utility functions for
+            dealing with javascript objects and arrays, enhancing productivity
+            and code readability.
+          </p>
+        </section>
+        <section>
+          <h2>WHY LODASH?</h2>
+          <p>
+            Lodash helps programmers write more concise and easier to maintain
+            JavaScript code. Lodash contains tools to simplify programming with
+            strings, numbers, arrays, functions and objects.
+          </p>
+          <p>Lodash’s modular methods are great for:</p>
+          <ul class="list">
+            <li class="fragment" data-fragment-index="0">
+              Iterating arrays, objects, & strings
+            </li>
+            <li class="fragment" data-fragment-index="1">
+              Manipulating & testing values
+            </li>
+            <li class="fragment" data-fragment-index="2">
+              Creating composite functions
+            </li>
+          </ul>
+        </section>
+        <section>
+          <p>Adding Lodash to a project</p>
+          <p class="text-left">In a browser:</p>
+          <pre>
+			<code data-trim>
+				<script src="lodash.js"></script>
+			</code>
+		  </pre>
+          <p class="text-left">Using npm:</p>
+          <pre>
+			<code data-trim data-noescape>
+				$ npm i -g npm
+				$ npm i --save lodash
+			</code>
+		  </pre>
+          <p class="text-left">In Node.js:</p>
+          <pre>
+			<code data-trim data-noescape>
+				// Load the full build.
+				var _ = require('lodash');
+				// Load the core build.
+				var _ = require('lodash/core');
+				// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+				var fp = require('lodash/fp');
+				// Load method categories.
+				var array = require('lodash/array');
+				var object = require('lodash/fp/object');
+				// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+				var at = require('lodash/at');
+				var curryN = require('lodash/fp/curryN');
+			</code>
+		  </pre>
+        </section>
+        <section>
+          <h3>
+            COMPLETE <a href="https://lodash.com/docs/4.17.15">DOCUMENTATION</a>
+          </h3>
+          <p>
+            Array, Collection, Date, Function, Lang, Math, Number, Object, Seq,
+            String, Util, Properties, Methods
+          </p>
+          <p>
+            Main function families: is*, stub*, to*, *By, *In, sorted*, *Depth,
+            *Right, *With, *While
+          </p>
+        </section>
+        <section>
+          By convention, Lodash module is mapped to the underscore character.
+        </section>
+        <section>
+          <p>Collection methods</p>
+          <p class="text-small">
+            map, reduce, filter, some, every, forEach (aka each), size, ...
+          </p>
+          <p class="text-left">_.map</p>
+          <pre>
+			<code data-trim data-noescape>
+				const data = [
+				{ name: 'Patrick',age: '25',},
+				{ name: 'John',age: '24',},
+				{ name: 'Teresa',age: '26',}
+				];
+
+				_.map(data, 'name');// [ 'Patrick', 'John', 'Teresa' ]
+			</code>
+		  </pre>
+          <p class="text-left">Works with nested properties as well</p>
+          <pre>
+			<code data-trim data-noescape>
+				const data = [
+				{ name: 'Patrick',age: '25',profile: {experience: 2} },
+				{ name: 'John',age: '24',profile: {experience: 2}},
+				{ name: 'Teresa',age: '26',profile: {experience: 4} }
+				];
+
+				_.map(data, 'profile.experience');// [ 2, 2, 4 ]
+			</code>
+		  </pre>
+        </section>
+        <section>
+          <pre>
+				<code data-trim data-noescape>
+					const users = [
+					{ name: 'Patrick', age: '25', profile: { experience: 2 } },
+					{ name: 'John', age: '24', profile: { experience: 2 } },
+					{ name: 'Teresa', age: '26', profile: { experience: 4 } }
+					];
+					_.find(users, user => user.name === 'John');
+					// { name: 'John', age: '24', profile: { experience: 2 } }
+				</code>
+			  </pre>
+          <pre>
+				<code data-trim data-noescape>
+					const users = [
+					{ name: 'Patrick', age: '25', profile: { experience: 3 } },
+					{ name: 'John', age: '24', profile: { experience: 2 } },
+					{ name: 'Teresa', age: '26', profile: { experience: 4 } }
+					];
+					_.filter(users, user => user.profile.experience > 2);
+					// [ { name: 'Patrick', age: '25', profile: { experience: 3 } },
+					//   { name: 'Teresa', age: '26', profile: { experience: 4 } } ]
+				</code>
+			  </pre>
+          <pre>
+				<code data-trim data-noescape>
+					const users = [
+					{ name: 'Patrick', age: '25', profile: { experience: 2 } },
+					{ name: 'John', age: '24', profile: { experience: 2 } },
+					{ name: 'Teresa', age: '26', profile: { experience: 4 } }
+					];
+					const usersByName = _.keyBy(users, 'name');
+					usersByName['Teresa'];// { name: 'Teresa', age: '26', profile: { experience: 4 } }
+				</code>
+			  </pre>
+        </section>
+        <section>
+          <p>Object methods</p>
+          <p class="text-small">assign, at, keys, forIn, keys, values, ...</p>
+          <p class="text-left">Object manipulation</p>
+          <pre>
+			<code data-trim data-noescape>
+				var object = { 'a': [{ 'b': { 'c': 3 } }] };
+
+				_.get(object, 'a[0].b.c');// => 3
+
+				_.set(object, 'a[0].b.c', 4);
+				console.log(object.a[0].b.c);// => 4
+
+				_.has(object, 'a');// => true
+			</code>
+		  </pre>
+          <p class="text-left">_.toPairs(object)</p>
+          <pre>
+			<code data-trim>
+				_.toPairs([{ 'a': 1, 'b': 2 }]);// => [['a', 1], ['b', 2]]
+			</code>
+		  </pre>
+          <p class="text-left">_.fromPairs(pairs)</p>
+          <pre>
+			<code data-trim>
+				_.fromPairs([['a', 1], ['b', 2]]);// => { 'a': 1, 'b': 2 }
+			</code>
+		  </pre>
+        </section>
+        <section>
+          <p class="text-left">_.cloneDeep</p>
+          <pre>
+			<code data-trim data-noescape class="code">
+				const users = [
+        {
+          name: 'Patrick', age: '25', profile: { experience: 3 }
+        },
+        {
+          name: 'John', age: '24', profile: { experience: 2 }
+        },
+        {
+          name: 'Teresa', age: '26', profile: { experience: 4 }
+        }
+      ];
+
+      const usersClone = _.cloneDeep(users);
+      usersClone[0].age = '27';
+
+      usersClone[0].age;
+      // 27
+      users[0].age;
+      // 25
+			</code>
+		  </pre>
+        </section>
+        <section>
+          <p>Function chaining</p>
+          <p class="text-left">_.chain</p>
+          <pre>
+			<code data-trim data-noescape class="code">
+				const users = [
+        {
+          name: 'Patrick', age: 25, profile: { experience: 3 }
+        },
+        {
+          name: 'John', age: 24, profile: { experience: 2 }
+        },
+        {
+          name: 'Teresa', age: 26, profile: { experience: 4 }
+        }
+      ];
+
+      _.chain(users)
+      .map('age')
+      .mean()
+      .value();
+      // 25
+			</code>
+		  </pre>
+        </section>
+        <section>
+          <pre>
+            <code data-trim data-noescape class="code-sm">
+              const users = [
+              {
+                name: 'Patrick', age: 25, profile: { experience: 3 }
+              },
+              {
+                name: 'John', age: 24, profile: { experience: 2 }
+              },
+              {
+                name: 'Teresa', age: 26, profile: { experience: 4 }
+              }
+            ];
+
+            const multiplyByTwo = numbers => _.map(numbers, num => num * 2);
+
+            _.mixin({ multiplyByTwo });
+
+            _.chain(users)
+            .map('age')
+            .multiplyByTwo()
+            .mean()
+            .value();
+            // 50
+            </code>
+            </pre>
+        </section>
+        <section>
+          <h2>THANK YOU!</h2>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
